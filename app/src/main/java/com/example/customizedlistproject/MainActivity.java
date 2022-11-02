@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lstBiler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 "0-100 på 5 min", R.drawable.bmw_isetta11));
         biler.add(new Bil(1000, "BMW Isetta 4 wheels",
                 "0-100 på 5 min", R.drawable.bmw_isetta12));
+        BilAdapter bilAdapter= new BilAdapter(biler, this);
+        lstBiler.setAdapter(bilAdapter);
     }
 }
