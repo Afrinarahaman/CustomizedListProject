@@ -1,6 +1,8 @@
 package com.example.customizedlistproject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,35 @@ public class BilAdapter extends BaseAdapter {
         txtDescription.setText(bil.getBeskrivelse());
         Button btnDelete =v.findViewById(R.id.btnDelete);
         btnDelete.setText("Delele " + bil.getName());
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                alert.setTitle("Delete Bil?" +bil.getName());
+                alert.setMessage("Ønsker De at slette den biler?");
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton)
+                    {
+                        int posToRemove = position;
+                        Bil remove = biler.remove(posToRemove);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int whichButton)
+                    {
+
+                    }
+                });
+
+                alert.show();
+            }
+        });
+
         return v;
     }
 }
